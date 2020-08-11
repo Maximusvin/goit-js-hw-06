@@ -80,11 +80,30 @@ console.groupEnd();
 
 // ======================== task-9 =======================================
 const getNamesSortedByFriendsCount = users => {
-  const userFriends = users.reduce((acc, users) => acc + users.friends.length, 0);
-  return userFriends;
+  return [...users]
+    .sort((prevPlayer, nextPlayer) => prevPlayer.friends.length - nextPlayer.friends.length)
+    .map(user => user.name);
 };
 
 console.group('Task-9');
 console.log(getNamesSortedByFriendsCount(users));
 console.groupEnd();
 // [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
+
+// ======================== task-10 =======================================
+const getSortedUniqueSkills = users => {
+  return users
+    .reduce((acc, user) => acc.concat(user.skills), [])
+    .reduce((acc, skill) => {
+      if (!acc.includes(skill)) {
+        acc.push(skill);
+      }
+      return acc;
+    }, [])
+    .sort();
+};
+
+console.group('Task-10');
+console.log(getSortedUniqueSkills(users));
+console.groupEnd();
+// [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
